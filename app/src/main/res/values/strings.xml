@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GameOfThronesApp</string>
+    <string name="house_name">House name</string>
+    <string name="list_of_houses">List of houses</string>
+    <string name="characters">Characters</string>
+    <string name="name">Name</string>
+    <string name="slug">Slug</string>
+    <string name="quote">Slug</string>
+    <string name="quotes">Quotes</string>
+</resources>
