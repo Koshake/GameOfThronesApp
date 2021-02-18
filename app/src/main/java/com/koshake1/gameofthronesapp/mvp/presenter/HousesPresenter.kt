@@ -1,6 +1,7 @@
 package com.koshake1.gameofthronesapp.mvp.presenter
 
 import com.koshake1.gameofthronesapp.mvp.model.entity.HousesData
+import com.koshake1.gameofthronesapp.mvp.model.repo.IHousesRepo
 import com.koshake1.gameofthronesapp.mvp.model.repo.retrofit.RetrofitHousesRepo
 import com.koshake1.gameofthronesapp.mvp.presenter.list.IHouseListPresenter
 import com.koshake1.gameofthronesapp.mvp.view.IHousesView
@@ -9,12 +10,17 @@ import com.koshake1.gameofthronesapp.navigation.Screens
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class HousesPresenter(
-    val housesRepo: RetrofitHousesRepo,
-    val mainThreadScheduler: Scheduler,
-    val router: Router
-) : MvpPresenter<IHousesView>() {
+class HousesPresenter
+ : MvpPresenter<IHousesView>() {
+
+    @Inject
+    lateinit var housesRepo: IHousesRepo
+    @Inject
+    lateinit var router: Router
+    @Inject
+    lateinit var mainThreadScheduler: Scheduler
 
     class HousesListPresenter : IHouseListPresenter {
         val houses = mutableListOf<HousesData>()

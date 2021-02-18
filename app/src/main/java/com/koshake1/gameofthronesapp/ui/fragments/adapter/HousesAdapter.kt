@@ -13,7 +13,7 @@ import com.koshake1.gameofthronesapp.mvp.view.list.HouseItemView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_house.view.*
 
-class HousesAdapter(val presenter : IHouseListPresenter, val imageLoader : IImageLoader<ImageView>) : RecyclerView.Adapter<HousesAdapter.ViewHolder>() {
+class HousesAdapter(val presenter : IHouseListPresenter) : RecyclerView.Adapter<HousesAdapter.ViewHolder>() {
 
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
         LayoutContainer, HouseItemView {
