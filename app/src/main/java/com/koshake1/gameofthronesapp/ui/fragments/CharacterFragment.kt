@@ -2,12 +2,12 @@ package com.koshake1.gameofthronesapp.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.koshake1.gameofthronesapp.App
 import com.koshake1.gameofthronesapp.R
+import com.koshake1.gameofthronesapp.di.character.CharacterSubComponent
 import com.koshake1.gameofthronesapp.mvp.model.entity.HousesData
 import com.koshake1.gameofthronesapp.mvp.presenter.CharactersPresenter
 import com.koshake1.gameofthronesapp.mvp.view.ICharacterView
@@ -30,12 +30,14 @@ class CharacterFragment : MvpAppCompatFragment(), ICharacterView, BackButtonList
     }
 
     private var adapter: CharactersAdapter? = null
+    private var characterSubComponent: CharacterSubComponent? = null
 
     val presenter: CharactersPresenter by moxyPresenter {
         val houses = arguments?.getParcelable<HousesData>(
             HOUSE_ARG
         ) as HousesData
-        CharactersPresenter(houses, App.instance.router)
+        characterSubComponent = App.instance.initCharacterSubComponent()
+        CharactersPresenter(houses).apply { characterSubComponent?.inject(this) }
     }
 
     override fun onCreateView(
@@ -43,6 +45,22 @@ class CharacterFragment : MvpAppCompatFragment(), ICharacterView, BackButtonList
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = View.inflate(context, R.layout.fragment_characters, null)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_character, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_back -> presenter.backPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun init() {
         Log.d(TAG, "init character")
@@ -57,7 +75,8 @@ class CharacterFragment : MvpAppCompatFragment(), ICharacterView, BackButtonList
     }
 
     override fun release() {
-
+        characterSubComponent = null
+        App.instance.releaseCharacterSubComponent()
     }
 
     override fun backPressed(): Boolean {

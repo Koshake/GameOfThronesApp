@@ -4,8 +4,12 @@ import com.koshake1.gameofthronesapp.mvp.view.IMainView
 import com.koshake1.gameofthronesapp.navigation.Screens
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class MainPresenter(val router: Router) : MvpPresenter<IMainView>() {
+class MainPresenter : MvpPresenter<IMainView>() {
+
+    @Inject
+    lateinit var  router: Router
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

@@ -1,8 +1,7 @@
 package com.koshake1.gameofthronesapp.mvp.model.repo.retrofit
 
-import android.app.usage.NetworkStats
 import com.koshake1.gameofthronesapp.mvp.model.api.IDataSource
-import com.koshake1.gameofthronesapp.mvp.model.cache.room.RoomQuotesCache
+import com.koshake1.gameofthronesapp.mvp.model.cache.IQuotesCache
 import com.koshake1.gameofthronesapp.mvp.model.entity.PersonData
 import com.koshake1.gameofthronesapp.mvp.model.entity.QuotesData
 import com.koshake1.gameofthronesapp.mvp.model.network.INetworkStatus
@@ -14,7 +13,7 @@ import java.lang.RuntimeException
 class RetrofitQuotesRepo(
     val api: IDataSource,
     val networkStatus: INetworkStatus,
-    val roomQuotesCache: RoomQuotesCache
+    val roomQuotesCache: IQuotesCache
 ) : IQuotesRepo {
     override fun getQuotes(person: PersonData) =
         networkStatus.isOnlineSingle().flatMap { isOnline ->

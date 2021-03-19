@@ -36,6 +36,6 @@ interface PersonDao {
     @Query("SELECT * FROM RoomPersonData")
     fun getAll(): List<RoomPersonData>
 
-    @Query("SELECT * FROM RoomPersonData WHERE personId = :personId LIMIT 1")
+    @Query("SELECT * FROM RoomPersonData WHERE personId = :personId")
     fun findForHouse(personId: String): List<RoomPersonData>
 }

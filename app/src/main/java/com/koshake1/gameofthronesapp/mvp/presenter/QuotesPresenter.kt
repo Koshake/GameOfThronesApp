@@ -1,6 +1,7 @@
 package com.koshake1.gameofthronesapp.mvp.presenter
 
 import com.koshake1.gameofthronesapp.mvp.model.entity.PersonData
+import com.koshake1.gameofthronesapp.mvp.model.repo.IQuotesRepo
 import com.koshake1.gameofthronesapp.mvp.model.repo.retrofit.RetrofitQuotesRepo
 import com.koshake1.gameofthronesapp.mvp.presenter.list.IQuotesListPresenter
 import com.koshake1.gameofthronesapp.mvp.view.IQuotesView
@@ -8,13 +9,18 @@ import com.koshake1.gameofthronesapp.mvp.view.list.QuotesItemView
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
 class QuotesPresenter(
-    val person: PersonData,
-    val quotesRepo: RetrofitQuotesRepo,
-    val mainThreadScheduler: Scheduler,
-    val router: Router
+    private val person: PersonData
 ) : MvpPresenter<IQuotesView>() {
+
+    @Inject
+    lateinit var quotesRepo: IQuotesRepo
+    @Inject
+    lateinit var router: Router
+    @Inject
+    lateinit var mainThreadScheduler: Scheduler
 
     class QuotesListPresenter : IQuotesListPresenter {
         val quotes = mutableListOf<String>()

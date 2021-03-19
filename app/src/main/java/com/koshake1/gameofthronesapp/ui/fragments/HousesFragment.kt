@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.koshake1.gameofthronesapp.ApiHolder
 import com.koshake1.gameofthronesapp.App
 import com.koshake1.gameofthronesapp.R
+import com.koshake1.gameofthronesapp.di.house.HouseSubComponent
 import com.koshake1.gameofthronesapp.mvp.model.cache.room.RoomHousesCache
 import com.koshake1.gameofthronesapp.mvp.model.repo.retrofit.RetrofitHousesRepo
 import com.koshake1.gameofthronesapp.mvp.model.room.Database
@@ -29,16 +30,12 @@ class HousesFragment : MvpAppCompatFragment(), IHousesView, BackButtonListener {
         fun newInstance() = HousesFragment()
     }
 
+    private var houseSubComponent : HouseSubComponent? = null
     val presenter by moxyPresenter {
-        HousesPresenter(
-            RetrofitHousesRepo(
-                ApiHolder().api, AndroidNetworkStatus(App.instance), RoomHousesCache(
-                    Database.getInstance()
-                )
-            ),
-            AndroidSchedulers.mainThread(),
-            App.instance.router
-        )
+        houseSubComponent = App.instance.initHouseSubComponent()
+        HousesPresenter().apply {
+            houseSubComponent?.inject(this)
+        }
     }
 
     var adapter: HousesAdapter? = null
@@ -53,7 +50,7 @@ class HousesFragment : MvpAppCompatFragment(), IHousesView, BackButtonListener {
     override fun init() {
         Log.d("tag", "fragment init")
         mainRecycler.layoutManager = LinearLayoutManager(context)
-        adapter = HousesAdapter(presenter.housesListPresenter, GlideImageLoader())
+        adapter = HousesAdapter(presenter.housesListPresenter)
         mainRecycler.adapter = adapter
     }
 
@@ -63,6 +60,8 @@ class HousesFragment : MvpAppCompatFragment(), IHousesView, BackButtonListener {
     }
 
     override fun release() {
+        houseSubComponent = null
+        App.instance.releaseHouseSubComponent()
     }
 
     override fun backPressed(): Boolean {

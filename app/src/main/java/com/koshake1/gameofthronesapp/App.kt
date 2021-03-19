@@ -1,14 +1,23 @@
 package com.koshake1.gameofthronesapp
 
 import android.app.Application
-import com.koshake1.gameofthronesapp.mvp.model.room.Database
-import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.Router
+import com.koshake1.gameofthronesapp.di.AppComponent
+import com.koshake1.gameofthronesapp.di.DaggerAppComponent
+import com.koshake1.gameofthronesapp.di.character.CharacterSubComponent
+import com.koshake1.gameofthronesapp.di.house.HouseSubComponent
+import com.koshake1.gameofthronesapp.di.modules.AppModule
+import com.koshake1.gameofthronesapp.di.quote.QuoteSubComponent
 
 class App : Application() {
-    private val cicerone: Cicerone<Router> by lazy {
-        Cicerone.create()
-    }
+
+    lateinit var appComponent: AppComponent
+        private set
+    var houseSubComponent: HouseSubComponent? = null
+        private set
+    var quoteSubComponent: QuoteSubComponent? = null
+        private set
+    var characterSubComponent: CharacterSubComponent? = null
+        private set
 
     companion object {
         lateinit var instance: App
@@ -17,13 +26,28 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-
-        Database.create(this)
+        appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(this))
+            .build()
     }
 
-    val navigatorHolder
-        get() = cicerone.navigatorHolder
+    fun initHouseSubComponent() = appComponent.houseSubComponent().also { houseSubComponent = it }
 
-    val router
-        get() = cicerone.router
+    fun initQuoteSubComponent() = houseSubComponent?.quoteSubComponent().also {
+        quoteSubComponent = it
+    }
+
+    fun initCharacterSubComponent() = houseSubComponent?.characterSubComponent().also { characterSubComponent = it }
+
+    fun releaseHouseSubComponent() {
+        houseSubComponent = null
+    }
+
+    fun releaseQuoteSubComponent() {
+        quoteSubComponent = null
+    }
+
+    fun releaseCharacterSubComponent() {
+        characterSubComponent = null
+    }
 }

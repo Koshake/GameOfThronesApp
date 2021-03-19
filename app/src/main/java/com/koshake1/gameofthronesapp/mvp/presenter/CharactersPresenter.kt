@@ -8,12 +8,15 @@ import com.koshake1.gameofthronesapp.mvp.view.list.CharacterItemView
 import com.koshake1.gameofthronesapp.navigation.Screens
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
 class CharactersPresenter(
-    private val house: HousesData,
-    val router: Router
+    private val house: HousesData
 ) :
     MvpPresenter<ICharacterView>() {
+
+    @Inject
+    lateinit var router: Router
 
     class CharactersListPresenter : ICharacterListPresenter {
         val characters = mutableListOf<PersonData>()
