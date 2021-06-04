@@ -6,6 +6,7 @@ import com.koshake1.gameofthronesapp.mvp.model.repo.retrofit.RetrofitQuotesRepo
 import com.koshake1.gameofthronesapp.mvp.presenter.list.IQuotesListPresenter
 import com.koshake1.gameofthronesapp.mvp.view.IQuotesView
 import com.koshake1.gameofthronesapp.mvp.view.list.QuotesItemView
+import com.koshake1.gameofthronesapp.navigation.Screens
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -41,6 +42,11 @@ class QuotesPresenter(
         super.onFirstViewAttach()
         viewState.init()
         loadData()
+
+        quotesListPresenter.itemClickListener = { itemView ->
+            val quote = quotesListPresenter.quotes[itemView.pos]
+            router.navigateTo(Screens.SingleQuoteScreen(person.name, quote))
+        }
     }
 
     val quotesListPresenter = QuotesListPresenter()

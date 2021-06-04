@@ -13,6 +13,7 @@ import com.koshake1.gameofthronesapp.mvp.presenter.CharactersPresenter
 import com.koshake1.gameofthronesapp.mvp.view.ICharacterView
 import com.koshake1.gameofthronesapp.ui.BackButtonListener
 import com.koshake1.gameofthronesapp.ui.fragments.adapter.CharactersAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_characters.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -48,6 +49,8 @@ class CharacterFragment : MvpAppCompatFragment(), ICharacterView, BackButtonList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity?)?.setSupportActionBar(charactersToolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -16,11 +16,11 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:title="@string/characters"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:fitsSystemWindows="true"
             app:theme="@style/ToolBarStyle"
+            app:expandedTitleTextAppearance="@android:color/transparent"
             app:expandedTitleMarginBottom="@dimen/medium_8"
             app:expandedTitleMarginEnd="@dimen/medium_16"
             app:expandedTitleMarginStart="@dimen/medium_large">
@@ -38,9 +38,12 @@
                 android:id="@+id/charactersToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/transparent"
-                app:layout_collapseMode="pin">
-            </androidx.appcompat.widget.Toolbar>
+                app:background="@android:color/transparent"
+                app:layout_anchor="@+id/appbar"
+                app:layout_anchorGravity="bottom"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="@string/characters" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

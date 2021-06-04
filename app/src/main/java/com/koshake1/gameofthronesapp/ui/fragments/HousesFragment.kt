@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.koshake1.gameofthronesapp.ApiHolder
 import com.koshake1.gameofthronesapp.App
@@ -20,6 +21,7 @@ import com.koshake1.gameofthronesapp.ui.fragments.adapter.HousesAdapter
 import com.koshake1.gameofthronesapp.ui.image.GlideImageLoader
 import com.koshake1.gameofthronesapp.ui.network.AndroidNetworkStatus
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_houses.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -45,7 +47,6 @@ class HousesFragment : MvpAppCompatFragment(), IHousesView, BackButtonListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = View.inflate(context, R.layout.fragment_houses, null)
-
 
     override fun init() {
         Log.d("tag", "fragment init")
