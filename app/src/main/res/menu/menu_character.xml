@@ -5,7 +5,7 @@
         android:id="@+id/action_back"
         android:orderInCategory="10"
         android:title="@string/back"
-        android:icon="@drawable/back_gray"
+        android:icon="@drawable/ic_back"
         app:showAsAction="always" />
 
 </menu>

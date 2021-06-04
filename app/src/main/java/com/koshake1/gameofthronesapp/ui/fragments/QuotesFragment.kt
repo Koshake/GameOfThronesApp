@@ -1,9 +1,8 @@
 package com.koshake1.gameofthronesapp.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.koshake1.gameofthronesapp.App
 import com.koshake1.gameofthronesapp.R
@@ -14,6 +13,8 @@ import com.koshake1.gameofthronesapp.mvp.view.IQuotesView
 import com.koshake1.gameofthronesapp.ui.BackButtonListener
 import com.koshake1.gameofthronesapp.ui.fragments.adapter.QuotesAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.appbar.*
+import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.android.synthetic.main.fragment_quotes.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -45,6 +46,24 @@ class QuotesFragment : MvpAppCompatFragment(), IQuotesView, BackButtonListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = View.inflate(context, R.layout.fragment_quotes, null)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_character, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_back -> presenter.backPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun init() {
         quotesRecycler.layoutManager = LinearLayoutManager(context)
