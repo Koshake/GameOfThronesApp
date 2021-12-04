@@ -45,7 +45,7 @@ class CharacterFragment : MvpAppCompatFragment(), ICharacterView, BackButtonList
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = View.inflate(context, R.layout.fragment_characters, null)
+    ): View? = View.inflate(context, R.layout.fragment_characters, null)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

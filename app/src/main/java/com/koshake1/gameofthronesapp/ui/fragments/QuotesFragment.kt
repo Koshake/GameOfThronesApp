@@ -41,11 +41,12 @@ class QuotesFragment : MvpAppCompatFragment(), IQuotesView, BackButtonListener {
     }
 
     private var adapter: QuotesAdapter? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = View.inflate(context, R.layout.fragment_quotes, null)
+    ) : View? = View.inflate(context, R.layout.fragment_quotes, null)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

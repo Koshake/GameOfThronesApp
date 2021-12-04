@@ -46,7 +46,8 @@ class HousesFragment : MvpAppCompatFragment(), IHousesView, BackButtonListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = View.inflate(context, R.layout.fragment_houses, null)
+    ) : View? = View.inflate(context, R.layout.fragment_houses, null)
+
 
     override fun init() {
         Log.d("tag", "fragment init")

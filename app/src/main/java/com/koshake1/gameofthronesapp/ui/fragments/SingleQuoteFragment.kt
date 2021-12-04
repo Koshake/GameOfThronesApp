@@ -40,7 +40,7 @@ class SingleQuoteFragment : MvpAppCompatFragment(), ISingleQuoteView, BackButton
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = View.inflate(context, R.layout.fragment_single_quote, null)
+    ) : View? = View.inflate(context, R.layout.fragment_single_quote, null)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
