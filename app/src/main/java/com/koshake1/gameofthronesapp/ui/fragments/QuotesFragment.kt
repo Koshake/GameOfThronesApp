@@ -11,6 +11,7 @@ import com.koshake1.gameofthronesapp.mvp.model.entity.PersonData
 import com.koshake1.gameofthronesapp.mvp.presenter.QuotesPresenter
 import com.koshake1.gameofthronesapp.mvp.view.IQuotesView
 import com.koshake1.gameofthronesapp.ui.BackButtonListener
+import com.koshake1.gameofthronesapp.ui.activity.MainActivity
 import com.koshake1.gameofthronesapp.ui.fragments.adapter.QuotesAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.appbar.*
@@ -52,16 +53,15 @@ class QuotesFragment : MvpAppCompatFragment(), IQuotesView, BackButtonListener {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_character, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+        (requireActivity() as MainActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_back -> presenter.backPressed()
+            android.R.id.home -> presenter.backPressed()
         }
         return super.onOptionsItemSelected(item)
     }

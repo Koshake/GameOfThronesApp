@@ -15,7 +15,7 @@ import javax.inject.Inject
 class MainActivity : MvpAppCompatActivity(), IMainView {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
-    val navigator = SupportAppNavigator(this, supportFragmentManager, R.id.container)
+    private val navigator = SupportAppNavigator(this, supportFragmentManager, R.id.container)
 
     private val presenter by moxyPresenter {
         MainPresenter().apply { App.instance.appComponent.inject(this) }

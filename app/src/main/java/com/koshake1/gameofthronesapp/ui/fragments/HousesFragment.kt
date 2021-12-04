@@ -5,23 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.koshake1.gameofthronesapp.ApiHolder
 import com.koshake1.gameofthronesapp.App
 import com.koshake1.gameofthronesapp.R
 import com.koshake1.gameofthronesapp.di.house.HouseSubComponent
-import com.koshake1.gameofthronesapp.mvp.model.cache.room.RoomHousesCache
-import com.koshake1.gameofthronesapp.mvp.model.repo.retrofit.RetrofitHousesRepo
-import com.koshake1.gameofthronesapp.mvp.model.room.Database
 import com.koshake1.gameofthronesapp.mvp.presenter.HousesPresenter
 import com.koshake1.gameofthronesapp.mvp.view.IHousesView
 import com.koshake1.gameofthronesapp.ui.BackButtonListener
 import com.koshake1.gameofthronesapp.ui.fragments.adapter.HousesAdapter
-import com.koshake1.gameofthronesapp.ui.image.GlideImageLoader
-import com.koshake1.gameofthronesapp.ui.network.AndroidNetworkStatus
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_houses.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -40,7 +31,7 @@ class HousesFragment : MvpAppCompatFragment(), IHousesView, BackButtonListener {
         }
     }
 
-    var adapter: HousesAdapter? = null
+    private var adapter: HousesAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,

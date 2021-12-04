@@ -10,7 +10,10 @@ import com.koshake1.gameofthronesapp.R
 import com.koshake1.gameofthronesapp.mvp.presenter.SingleQuotePresenter
 import com.koshake1.gameofthronesapp.mvp.view.ISingleQuoteView
 import com.koshake1.gameofthronesapp.ui.BackButtonListener
+import com.koshake1.gameofthronesapp.ui.activity.MainActivity
 import kotlinx.android.synthetic.main.appbar.*
+import kotlinx.android.synthetic.main.appbar.collapsing_toolbar
+import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.android.synthetic.main.fragment_single_quote.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -40,7 +43,8 @@ class SingleQuoteFragment : MvpAppCompatFragment(), ISingleQuoteView, BackButton
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) : View? = View.inflate(context, R.layout.fragment_single_quote, null)
+    ) : View? =
+        View.inflate(context, R.layout.fragment_single_quote, null)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,6 +60,13 @@ class SingleQuoteFragment : MvpAppCompatFragment(), ISingleQuoteView, BackButton
         return false
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> presenter.backPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun updateText(text: String) {
         Log.d(TAG, "single quote $text")
         textViewQuote.text = "\"$text\""
@@ -64,7 +75,6 @@ class SingleQuoteFragment : MvpAppCompatFragment(), ISingleQuoteView, BackButton
     override fun updateName(text: String) {
         Log.d(TAG, "single quote $text")
         collapsing_toolbar.title = "$text:"
-        //textViewName.text = "$text:"
     }
 
     override fun backPressed(): Boolean {
@@ -79,5 +89,9 @@ class SingleQuoteFragment : MvpAppCompatFragment(), ISingleQuoteView, BackButton
     private fun initToolBar() {
         setHasOptionsMenu(true)
         (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (requireActivity() as MainActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+        }
     }
 }

@@ -7,9 +7,13 @@
         <entry key="..\:/education/GameOfThronesApp/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.2675925925925926" />
         <entry key="..\:/education/GameOfThronesApp/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.2675925925925926" />
         <entry key="..\:/education/GameOfThronesApp/app/src/main/res/drawable/side_nav_bar.xml" value="0.2675925925925926" />
+        <entry key="..\:/education/GameOfThronesApp/app/src/main/res/layout/activity_main.xml" value="0.1641337386018237" />
+        <entry key="..\:/education/GameOfThronesApp/app/src/main/res/layout/appbar.xml" value="0.1641337386018237" />
         <entry key="..\:/education/GameOfThronesApp/app/src/main/res/layout/fragment_characters.xml" value="0.16111111111111112" />
         <entry key="..\:/education/GameOfThronesApp/app/src/main/res/layout/fragment_houses.xml" value="0.16111111111111112" />
         <entry key="..\:/education/GameOfThronesApp/app/src/main/res/layout/fragment_quotes.xml" value="0.16111111111111112" />
+        <entry key="..\:/education/GameOfThronesApp/app/src/main/res/layout/fragment_single_quote.xml" value="0.1641337386018237" />
+        <entry key="..\:/education/GameOfThronesApp/app/src/main/res/menu/menu_character.xml" value="0.225" />
         <entry key="..\:/education/GameOfThronesApp/app/src/main/res/menu/quote_drawer.xml" value="0.36102564102564105" />
         <entry key="..\:/education/GameOfThronesApp/app/src/main/res/menu/single_quote.xml" value="0.36666666666666664" />
       </map>

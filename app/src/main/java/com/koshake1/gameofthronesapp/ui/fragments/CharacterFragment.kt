@@ -12,6 +12,7 @@ import com.koshake1.gameofthronesapp.mvp.model.entity.HousesData
 import com.koshake1.gameofthronesapp.mvp.presenter.CharactersPresenter
 import com.koshake1.gameofthronesapp.mvp.view.ICharacterView
 import com.koshake1.gameofthronesapp.ui.BackButtonListener
+import com.koshake1.gameofthronesapp.ui.activity.MainActivity
 import com.koshake1.gameofthronesapp.ui.fragments.adapter.CharactersAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_characters.*
@@ -51,16 +52,15 @@ class CharacterFragment : MvpAppCompatFragment(), ICharacterView, BackButtonList
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         (activity as AppCompatActivity?)?.setSupportActionBar(charactersToolbar)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_character, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+        (requireActivity() as MainActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_back -> presenter.backPressed()
+            android.R.id.home -> presenter.backPressed()
         }
         return super.onOptionsItemSelected(item)
     }
