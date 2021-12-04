@@ -12,8 +12,8 @@ import java.lang.RuntimeException
 
 class RetrofitQuotesRepo(
     val api: IDataSource,
-    val networkStatus: INetworkStatus,
-    val roomQuotesCache: IQuotesCache
+    private val networkStatus: INetworkStatus,
+    private val roomQuotesCache: IQuotesCache
 ) : IQuotesRepo {
     override fun getQuotes(person: PersonData) =
         networkStatus.isOnlineSingle().flatMap { isOnline ->
@@ -25,6 +25,5 @@ class RetrofitQuotesRepo(
             } else {
                 roomQuotesCache.getQuotes(person)
             }
-
         }
 }

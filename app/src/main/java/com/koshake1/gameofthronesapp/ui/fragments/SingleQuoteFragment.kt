@@ -13,7 +13,6 @@ import com.koshake1.gameofthronesapp.ui.BackButtonListener
 import com.koshake1.gameofthronesapp.ui.activity.MainActivity
 import kotlinx.android.synthetic.main.appbar.*
 import kotlinx.android.synthetic.main.appbar.collapsing_toolbar
-import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.android.synthetic.main.fragment_single_quote.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -69,7 +68,7 @@ class SingleQuoteFragment : MvpAppCompatFragment(), ISingleQuoteView, BackButton
 
     override fun updateText(text: String) {
         Log.d(TAG, "single quote $text")
-        textViewQuote.text = "\"$text\""
+        textViewQuote.text = context?.getString(R.string.single_quote_text, text)
     }
 
     override fun updateName(text: String) {

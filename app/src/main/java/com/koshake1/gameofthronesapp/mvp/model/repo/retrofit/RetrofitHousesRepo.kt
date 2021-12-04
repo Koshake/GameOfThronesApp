@@ -10,8 +10,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class RetrofitHousesRepo(
     val api: IDataSource,
-    val networkStatus: INetworkStatus,
-    val roomHousesCache: IHousesCache,
+    private val networkStatus: INetworkStatus,
+    private val roomHousesCache: IHousesCache,
 ) : IHousesRepo {
     override fun getHouses(): Single<List<HousesData>> =
         networkStatus.isOnlineSingle().flatMap { isOnline ->
